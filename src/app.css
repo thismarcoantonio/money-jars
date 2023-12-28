@@ -1,3 +1,8 @@
+:root {
+  --color-primary: #31a7cc;
+  --color-white: #fafafa;
+}
+
 *,
 *::before,
 *::after {
@@ -8,8 +13,14 @@
 
 body {
   font-family: sans-serif;
+  background-color: var(--color-white);
 }
 
+button {
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+}
 /*
 https://dribbble.com/shots/15330847-Music-App/attachments/7089318?mode=media
 */
