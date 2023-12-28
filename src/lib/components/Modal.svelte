@@ -3,11 +3,14 @@
     <slot name="header" />
     <slot />
   </div>
-  <button class="modal__overlay" on:click={() => dispatch('close')} />
+  <button class="modal__overlay" on:click={() => dispatch("close")} />
 </div>
+
+<!-- https://dribbble.com/shots/18258781-Inbox-requests-for-web3-mobile-app/attachments/13464398?mode=media -->
 
 <script>
 import { createEventDispatcher } from "svelte";
+import { slide } from "svelte/transition";
 
 const dispatch = createEventDispatcher();
 </script>
@@ -39,8 +42,6 @@ const dispatch = createEventDispatcher();
   width: 100%;
   height: 100%;
   position: absolute;
-  background-color: rgba(0, 0, 0, .3);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 </style>
-
-<!-- https://dribbble.com/shots/18258781-Inbox-requests-for-web3-mobile-app/attachments/13464398?mode=media -->

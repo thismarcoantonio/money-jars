@@ -22,7 +22,7 @@
 </Modal>
 
 <script lang="ts">
-import Modal from './Modal.svelte';
+import Modal from "./Modal.svelte";
 import type { Jar } from "../types/Jar";
 
 export let jar: Jar;

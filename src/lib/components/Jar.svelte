@@ -11,7 +11,7 @@
 </div>
 
 <script lang="ts">
-import type { Jar } from '../types/Jar';
+import type { Jar } from "../types/Jar";
 
 export let jar: Jar;
 </script>
