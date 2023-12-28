@@ -1,9 +1,14 @@
 <div class="modal">
-  <div transition:slide={{ duration: 300 }} class="modal__content">
-    <slot name="header" />
+  <div transition:slide={{ duration: 300 }} class="modal__container">
+    <div class="modal__header">
+      <slot name="header" />
+      <Button on:click={handleClose} icon>
+        <Icon icon="close" />
+      </Button>
+    </div>
     <slot />
   </div>
-  <button class="modal__overlay" on:click={() => dispatch("close")} />
+  <button class="modal__overlay" on:click={handleClose} />
 </div>
 
 <!-- https://dribbble.com/shots/18258781-Inbox-requests-for-web3-mobile-app/attachments/13464398?mode=media -->
@@ -11,8 +16,14 @@
 <script>
 import { createEventDispatcher } from "svelte";
 import { slide } from "svelte/transition";
+import Button from "./Button.svelte";
+import Icon from "./Icon.svelte";
 
 const dispatch = createEventDispatcher();
+
+function handleClose() {
+  dispatch("close");
+}
 </script>
 
 <style>
@@ -26,14 +37,22 @@ const dispatch = createEventDispatcher();
   align-items: flex-end;
 }
 
-.modal__content {
+.modal__container {
   z-index: 1;
   position: relative;
   width: 100%;
   padding: 16px;
-  height: 60vh;
+  height: 80vh;
   background-color: white;
   border-radius: 12px 12px 0 0;
+}
+
+.modal__header {
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .modal__overlay {
