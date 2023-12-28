@@ -1,5 +1,5 @@
 <div class="modal">
-  <div class="modal__content">
+  <div transition:slide={{ duration: 300 }} class="modal__content">
     <slot name="header" />
     <slot />
   </div>
