@@ -2,7 +2,7 @@
   <div transition:slide={{ duration: 300 }} class="modal__container">
     <div class="modal__header">
       <slot name="header" />
-      <Button on:click={handleClose} icon>
+      <Button on:click={handleClose} icon variant="secondary">
         <Icon icon="close" />
       </Button>
     </div>

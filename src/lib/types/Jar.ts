@@ -1,5 +1,5 @@
 export interface JarHistory {
-  date: Date;
+  date: number;
   amount: number;
 }
 

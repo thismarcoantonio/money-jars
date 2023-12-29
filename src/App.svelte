@@ -29,12 +29,21 @@ const jars = [
   {
     title: "1st jar",
     amount: 300,
-    history: [{ amount: 120, date: new Date() }],
+    history: [
+      { amount: -120, date: new Date() },
+      { amount: 500, date: new Date() },
+      { amount: -320, date: new Date() },
+    ],
   },
   {
     title: "2nd jar",
     amount: 320,
-    history: [{ amount: 20, date: new Date() }],
+    history: [
+      { amount: -20, date: new Date() },
+      { amount: -39.99, date: new Date() },
+      { amount: -42.99, date: new Date() },
+      { amount: 500, date: new Date() },
+    ],
   },
 ];
 
