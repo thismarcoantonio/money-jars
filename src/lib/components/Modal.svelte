@@ -50,6 +50,7 @@ function handleClose() {
 .modal__header {
   font-size: 24px;
   font-weight: 600;
+  margin-bottom: 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
