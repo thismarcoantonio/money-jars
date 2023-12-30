@@ -1,14 +1,14 @@
 <Modal on:close>
   <span slot="header">Create Jar</span>
   <form on:submit|preventDefault={handleSubmit}>
-    <Input label="Title" name="name" bind:value={values.name} />
+    <Input label="Title" name="title" bind:value={values.title} />
     <Input
       type="number"
       label="Amount"
       name="amount"
       bind:value={values.amount}
     />
-    <Button>Save</Button>
+    <Button type="submit">Save</Button>
   </form>
 </Modal>
 
@@ -17,15 +17,26 @@ import { createEventDispatcher } from "svelte";
 import Modal from "./Modal.svelte";
 import Input from "./Input.svelte";
 import Button from "./Button.svelte";
+import { createJar } from "../utils/file";
 
 const dispatch = createEventDispatcher();
 
 let values = {
-  name: "",
+  title: "",
   amount: null,
 };
 
-function handleSubmit() {
-  dispatch("close");
+async function handleSubmit() {
+  if (values.title && values.amount) {
+    await createJar({
+      title: values.title,
+      amount: values.amount,
+      history:
+        values.amount >= 0
+          ? [{ amount: values.amount!, date: new Date().getTime() }]
+          : [],
+    });
+    dispatch("close");
+  }
 }
 </script>

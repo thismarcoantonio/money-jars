@@ -17,35 +17,22 @@
 {/if}
 
 <script lang="ts">
+import { onMount } from "svelte";
 import Header from "./lib/components/Header.svelte";
 import Jar from "./lib/components/Jar.svelte";
 import JarModal from "./lib/components/JarModal.svelte";
 import CreateJarModal from "./lib/components/CreateJarModal.svelte";
+import { getJars } from "./lib/utils/file";
+import type { Jar as JarType } from "./lib/types/Jar";
 
 let activeJarIndex: number | null = null;
 let isCreatingJar: boolean = false;
 
-const jars = [
-  {
-    title: "1st jar",
-    amount: 300,
-    history: [
-      { amount: -120, date: new Date().getTime() },
-      { amount: 500, date: new Date().getTime() },
-      { amount: -320, date: new Date().getTime() },
-    ],
-  },
-  {
-    title: "2nd jar",
-    amount: 320,
-    history: [
-      { amount: -20, date: new Date().getTime() },
-      { amount: -39.99, date: new Date().getTime() },
-      { amount: -42.99, date: new Date().getTime() },
-      { amount: 500, date: new Date().getTime() },
-    ],
-  },
-];
+let jars: JarType[] = [];
+
+onMount(async () => {
+  jars = await getJars();
+});
 
 function setActiveJarIndex(index: number) {
   activeJarIndex = index;
