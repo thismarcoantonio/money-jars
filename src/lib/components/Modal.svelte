@@ -11,8 +11,6 @@
   <button class="modal__overlay" on:click={handleClose} />
 </div>
 
-<!-- https://dribbble.com/shots/18258781-Inbox-requests-for-web3-mobile-app/attachments/13464398?mode=media -->
-
 <script>
 import { createEventDispatcher } from "svelte";
 import { slide } from "svelte/transition";

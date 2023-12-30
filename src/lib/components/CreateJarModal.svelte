@@ -8,7 +8,9 @@
       name="amount"
       bind:value={values.amount}
     />
-    <Button type="submit">Save</Button>
+    <Button disabled={!values.title || !values.amount} type="submit">
+      Save
+    </Button>
   </form>
 </Modal>
 

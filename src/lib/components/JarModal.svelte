@@ -10,7 +10,7 @@
     </Button>
   </div>
   <div>
-    <CreateExpense />
+    <CreateExpense jarId={jar.id} />
     <HistoryList historyList={jar.history} />
   </div>
 </Modal>

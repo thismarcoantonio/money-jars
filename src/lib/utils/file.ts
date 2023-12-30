@@ -1,7 +1,7 @@
 import { v4 as uuid } from "uuid";
 import { Preferences } from "@capacitor/preferences";
 import { jars as jarsState } from "../store";
-import type { Jar } from "../types/Jar";
+import type { Jar, JarHistory } from "../types/Jar";
 
 const KEY = "jars";
 
@@ -28,4 +28,29 @@ export async function editJar(jar: Jar) {
     ...jars.slice(jarIndex + 1),
   ]);
   return Preferences.set({ key: KEY, value });
+}
+
+export async function createExpense({
+  id,
+  expense,
+}: {
+  id: Jar["id"];
+  expense: JarHistory;
+}) {
+  const jars = await getJars();
+  const value = jars.map((jar) => {
+    if (jar.id !== id) {
+      return jar;
+    }
+
+    return {
+      id: jar.id,
+      title: jar.title,
+      amount: jar.amount - expense.amount,
+      history: [expense, ...jar.history],
+    };
+  });
+
+  Preferences.set({ key: KEY, value: JSON.stringify(value) });
+  return jarsState.set(value);
 }

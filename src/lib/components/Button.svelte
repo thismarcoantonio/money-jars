@@ -1,11 +1,13 @@
 <button
   on:click
   {type}
+  {disabled}
   class="button"
   class:button--primary={variant === "primary"}
   class:button--secondary={variant === "secondary"}
   class:button--icon={icon}
   class:button--full-width={fullWidth}
+  class:button--disabled={disabled}
 >
   <slot />
 </button>
@@ -15,6 +17,7 @@ export let icon: boolean = false;
 export let variant: "primary" | "secondary" = "primary";
 export let type: "button" | "submit" = "button";
 export let fullWidth: boolean = false;
+export let disabled: boolean = false;
 </script>
 
 <style>
@@ -44,5 +47,10 @@ export let fullWidth: boolean = false;
 
 .button--full-width {
   width: 100%;
+}
+
+.button--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 </style>
