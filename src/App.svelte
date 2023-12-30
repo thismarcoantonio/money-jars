@@ -1,10 +1,16 @@
 <Header on:create-jar={() => (isCreatingJar = true)} />
 <div class="jars-list">
-  <div class="jars-list__content">
-    {#each jars as jar, index}
-      <Jar on:click={() => setActiveJarIndex(index)} {jar} />
-    {/each}
-  </div>
+  {#if loading}
+    <div class="jars-list__message">gLoading...</div>
+  {:else if jars.length}
+    <div class="jars-list__content">
+      {#each jars as jar, index}
+        <Jar on:click={() => setActiveJarIndex(index)} {jar} />
+      {/each}
+    </div>
+  {:else}
+    <div class="jars-list__message">No jars created yet!</div>
+  {/if}
 </div>
 {#if activeJarIndex != null}
   <JarModal
@@ -28,6 +34,7 @@ import type { Jar as JarType } from "./lib/types/Jar";
 let activeJarIndex: number | null = null;
 let isCreatingJar: boolean = false;
 
+let loading: boolean = false;
 let jars: JarType[] = [];
 
 onMount(async () => {
@@ -57,5 +64,12 @@ function setActiveJarIndex(index: number) {
   flex-shrink: 0;
   padding-left: 16px;
   align-items: flex-start;
+}
+
+.jars-list__message {
+  padding: 16px;
+  text-align: center;
+  font-size: 18px;
+  opacity: 0.8;
 }
 </style>
