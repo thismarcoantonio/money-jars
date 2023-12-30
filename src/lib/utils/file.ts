@@ -18,16 +18,36 @@ export async function createJar(jar: Omit<Jar, "id">) {
   return jarsState.set(value);
 }
 
-export async function editJar(jar: Jar) {
+export async function addAmount({
+  id,
+  amount,
+}: {
+  id: Jar["id"];
+  amount: Jar["amount"];
+}) {
   const jars = await getJars();
-  const jarIndex = jars.findIndex((currentJar) => currentJar.id === jar.id);
+  const value = jars.map((jar) => {
+    if (jar.id !== id) {
+      return jar;
+    }
 
-  const value = JSON.stringify([
-    ...jars.slice(0, jarIndex),
-    jar,
-    ...jars.slice(jarIndex + 1),
-  ]);
-  return Preferences.set({ key: KEY, value });
+    return {
+      id: jar.id,
+      title: jar.title,
+      amount: jar.amount + amount,
+      history: [
+        {
+          date: new Date().getTime(),
+          amount: amount,
+          description: "Add amount",
+        },
+        ...jar.history,
+      ],
+    };
+  });
+
+  Preferences.set({ key: KEY, value: JSON.stringify(value) });
+  return jarsState.set(value);
 }
 
 export async function createExpense({
@@ -47,7 +67,7 @@ export async function createExpense({
       id: jar.id,
       title: jar.title,
       amount: jar.amount - expense.amount,
-      history: [expense, ...jar.history],
+      history: [{ ...expense, amount: -expense.amount }, ...jar.history],
     };
   });
 
