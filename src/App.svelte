@@ -2,9 +2,9 @@
 <div class="jars-list">
   {#if loading}
     <div class="jars-list__message">gLoading...</div>
-  {:else if jars.length}
+  {:else if $jars.length}
     <div class="jars-list__content">
-      {#each jars as jar, index}
+      {#each $jars as jar, index}
         <Jar on:click={() => setActiveJarIndex(index)} {jar} />
       {/each}
     </div>
@@ -15,7 +15,7 @@
 {#if activeJarIndex != null}
   <JarModal
     on:close={() => (activeJarIndex = null)}
-    jar={jars[activeJarIndex]}
+    jar={$jars[activeJarIndex]}
   />
 {/if}
 {#if isCreatingJar}
@@ -29,16 +29,16 @@ import Jar from "./lib/components/Jar.svelte";
 import JarModal from "./lib/components/JarModal.svelte";
 import CreateJarModal from "./lib/components/CreateJarModal.svelte";
 import { getJars } from "./lib/utils/file";
-import type { Jar as JarType } from "./lib/types/Jar";
+import { jars } from "./lib/store";
 
 let activeJarIndex: number | null = null;
 let isCreatingJar: boolean = false;
 
 let loading: boolean = false;
-let jars: JarType[] = [];
 
 onMount(async () => {
-  jars = await getJars();
+  const value = await getJars();
+  jars.set(value);
 });
 
 function setActiveJarIndex(index: number) {

@@ -4,7 +4,7 @@ export interface JarHistory {
 }
 
 export interface Jar {
-  id: number;
+  id: string;
   title: string;
   amount: number;
   history: JarHistory[];

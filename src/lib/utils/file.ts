@@ -1,5 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { Preferences } from "@capacitor/preferences";
+import { jars as jarsState } from "../store";
 import type { Jar } from "../types/Jar";
 
 const KEY = "jars";
@@ -11,8 +12,10 @@ export async function getJars(): Promise<Jar[]> {
 
 export async function createJar(jar: Omit<Jar, "id">) {
   const jars = await getJars();
-  const value = JSON.stringify([...jars, { ...jar, id: uuid() }]);
-  return Preferences.set({ key: KEY, value });
+  const value = [...jars, { ...jar, id: uuid() }];
+
+  Preferences.set({ key: KEY, value: JSON.stringify(value) });
+  return jarsState.set(value);
 }
 
 export async function editJar(jar: Jar) {
