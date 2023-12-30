@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">money-jars</string>
+    <string name="title_activity_main">money-jars</string>
+    <string name="package_name">com.moneyjars.app</string>
+    <string name="custom_url_scheme">com.moneyjars.app</string>
+</resources>
